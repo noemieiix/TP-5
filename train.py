@@ -101,10 +101,10 @@ def main(args):
         # Plot the results
         plot_results(losses_train, losses_test, acc_train, acc_test, args)
 
-        # To do 6
-        save_model(model, args)
-        visualize_results(x_test, y_test, model, device, args)
-
+        if loss < min(losses_test[:-1], default=float("inf")):
+            save_model(model, args)
+            visualize_results(x_test, y_test, model, device, args)
+        
     # Save the final results 
     with open(os.path.join(args.path, 'results.txt'), 'a') as f:
         f.write(f'Clean:\n')
